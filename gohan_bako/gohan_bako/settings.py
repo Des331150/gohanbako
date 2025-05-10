@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,10 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "recipes")
+MEDIA_URL = "/recipes/"
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'gohan.apps.GohanConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -104,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Accra'
 
 USE_I18N = True
 
