@@ -5,6 +5,7 @@ from rest_framework import status
 from .models import User, Recipes
 from .serializer import RecipesSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny 
+from rest_framework.pagination import PageNumberPagination
 # Create your views here.
 
 @api_view(["POST"])
@@ -19,9 +20,12 @@ def create_user(request):
 
 @api_view(["GET"])
 def list_recipes(request):
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
     recipes = Recipes.objects.all()
-    serializer = RecipesSerializer(recipes, many=True)
-    return Response(serializer.data)
+    result_page = paginator.paginate_queryset(recipes, request)
+    serializer = RecipesSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
 
 
 @api_view(["GET"])
