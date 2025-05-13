@@ -7,6 +7,7 @@ from .serializer import RecipesSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated,AllowAny 
 from rest_framework.pagination import PageNumberPagination
 from .filters import RecipesFilter
+from rest_framework.authtoken.views import obtain_auth_token
 # Create your views here.
 
 @api_view(["POST"])
